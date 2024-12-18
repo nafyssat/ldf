@@ -62,6 +62,8 @@
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>2.4.3</version>
                 <configuration>
+                    <projectId>tinyldf-datastore</projectId> <!-- Remplacez par l'ID de votre projet Google Cloud -->
+                    <version>1</version> 
                      <jvmFlags>
                     <jvmFlag>--add-opens=java.base/sun.net.www.protocol.https=ALL-UNNAMED</jvmFlag>
                     <jvmFlag>--add-opens=java.base/java.lang=ALL-UNNAMED</jvmFlag>

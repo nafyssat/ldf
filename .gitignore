@@ -1,0 +1,44 @@
+# Fichiers compilés
+target/
+*.class
+
+# Fichiers de logs
+*.log
+logs/
+
+# Dépendances locales de Maven
+.m2/
+
+# Configurations locales des IDEs
+*.iml
+.idea/
+*.vscode/
+*.classpath
+*.project
+.settings/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers spécifiques à App Engine
+appengine-generated/
+
+# Exclure les sauvegardes et fichiers temporaires
+*~
+*.bak
+*.swp
+*.swo
+
+# Exclure les artefacts générés par Maven
+*.jar
+*.war
+*.ear
+
+# Fichiers de cache
+*.cache
+*.tmp
+
+# Configurations des outils
+*.env
+*.metadata
