@@ -1,0 +1,11 @@
+indexes:
+- kind: Quad
+  properties:
+  - name: subject
+    direction: asc
+  - name: predicate
+    direction: asc
+  - name: object
+    direction: asc
+  - name: graph
+    direction: asc

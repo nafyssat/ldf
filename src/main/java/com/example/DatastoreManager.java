@@ -3,11 +3,9 @@ package com.example;
 
 import com.google.cloud.datastore.*;
 
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.Query;
 
 public class DatastoreManager {
     private final Datastore datastore;
@@ -25,7 +23,7 @@ public class DatastoreManager {
             throw new IllegalArgumentException("All parameters (subject, predicate, object, graph) must be non-null.");
         }
 
-        Key key = datastore.newKeyFactory()
+        com.google.cloud.datastore.Key key = datastore.newKeyFactory()
                 .setKind("Quad")
                 .newKey(subject + ":" + predicate);
 
@@ -46,12 +44,15 @@ public class DatastoreManager {
             (predicate == null || predicate.trim().isEmpty()) &&
             (object == null || object.trim().isEmpty()) &&
             (graph == null || graph.trim().isEmpty())) {
+                System.out.println("pas de chance tout est vide");
             return new ArrayList<>();
         }
 
         List<Entity> results = new ArrayList<>();
 
         if (subject != null && !subject.trim().isEmpty()) {
+            System.out.println("on a trouvé un sujet "+subject);
+
             Query<Entity> subjectQuery = Query.newEntityQueryBuilder()
                     .setKind("Quad")
                     .setFilter(StructuredQuery.PropertyFilter.eq("subject", subject))
@@ -59,6 +60,7 @@ public class DatastoreManager {
                     .setOffset((page - 1) * pageSize)
                     .build();
             datastore.run(subjectQuery).forEachRemaining(results::add);
+            System.out.println(results+"result");
         }
 
         if (predicate != null && !predicate.trim().isEmpty()) {

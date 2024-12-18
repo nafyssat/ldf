@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Find Matching Quads</h1>
-    <form id="quadForm">
+    <form id="quadForm" >
         <label>Subject: <input type="text" name="subject" id="subject"></label><br>
         <label>Predicate: <input type="text" name="predicate" id="predicate"></label><br>
         <label>Object: <input type="text" name="object" id="object"></label><br>
@@ -25,6 +25,8 @@
             const predicate = document.getElementById('predicate').value.trim();
             const object = document.getElementById('object').value.trim();
             const graph = document.getElementById('graph').value.trim();
+            console.log("subject index 1");
+            console.log(subject);
 
             // Validate that at least one field is filled
             if (!subject && !predicate && !object && !graph) {

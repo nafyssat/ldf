@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quad Matching</title>
+</head>
+<body>
+    <h1>Find Matching Quads</h1>
+    <form id="quadForm" >
+        <label>Subject: <input type="text" name="subject" id="subject"></label><br>
+        <label>Predicate: <input type="text" name="predicate" id="predicate"></label><br>
+        <label>Object: <input type="text" name="object" id="object"></label><br>
+        <label>Graph: <input type="text" name="graph" id="graph"></label><br>
+        <button type="submit">Find Matching Quads</button>
+    </form>
+
+    <div id="results"></div>
+
+    <script>
+        document.getElementById('quadForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const subject = document.getElementById('subject').value.trim();
+            const predicate = document.getElementById('predicate').value.trim();
+            const object = document.getElementById('object').value.trim();
+            const graph = document.getElementById('graph').value.trim();
+            console.log("subject index 1");
+            console.log(subject);
+
+            // Validate that at least one field is filled
+            if (!subject && !predicate && !object && !graph) {
+                alert('Please provide at least one search criterion.');
+                return;
+            }
+
+            const data = { subject, predicate, object, graph, page: 1 };
+
+            fetch('/ldf', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.getElementById('results');
+                if (data.message) {
+                    resultsDiv.innerHTML = `<p>${data.message}</p>`;
+                } else {
+                    resultsDiv.innerHTML = `<pre>${JSON.stringify(data.results, null, 2)}</pre>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('results').innerHTML = '<p style="color: red;">Error retrieving results.</p>';
+            });
+        });
+    </script>
+</body>
+</html>
